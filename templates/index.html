@@ -8,10 +8,27 @@
     <h1>Hoş geldiniz!</h1>
     <p>Bu sistem, Kuran'daki kelimelerin ebced değerlerini analiz eder.</p>
 
-<form method="post">
-  <input type="text" name="kelime" placeholder="Kelimeyi giriniz" required>
-  <button type="submit">Ebced Hesapla</button>
-</form>
-    
+    <!-- Form to submit a word -->
+    <form method="post" action="/analyze">
+        <input type="text" name="kelime" placeholder="Kelimeyi giriniz" required>
+        <button type="submit">Ebced Hesapla</button>
+    </form>
+
+    <!-- Display results if available -->
+    {% if kelime %}
+        <h2>Sonuçlar:</h2>
+        <p>Kelime: {{ kelime }}</p>
+        <p>Ebced Değeri: {{ ebced }}</p>
+        <h3>Tevafuklar:</h3>
+        {% if tevafuklar %}
+            <ul>
+                {% for tevafuk in tevafuklar %}
+                    <li>Element: {{ tevafuk.element }}, Atom Numarası: {{ tevafuk.atom_no }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>Tevafuk bulunamadı.</p>
+        {% endif %}
+    {% endif %}
 </body>
 </html>
